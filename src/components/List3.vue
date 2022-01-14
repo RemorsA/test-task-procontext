@@ -29,7 +29,6 @@
       </div>
 
     </div>
-
   </div>
 </template>
 
@@ -40,7 +39,8 @@ export default {
       items: [
         {item: 'item-1', value: 1, color: '#B0FFDB', count: 0},
         {item: 'item-2', value: 2, color: '#FF70BC', count: 0},
-        {item: 'item-3', value: 3, color: '#FF5319', count: 0}
+        {item: 'item-3', value: 3, color: '#FF5319', count: 0},
+        {item: 'item-4', value: 4, color: '#FF5322', count: 0}
       ],
       arrayWithItems: [],
       checkedList: [],
@@ -48,7 +48,6 @@ export default {
       currentColor: '',
       openCloseList: false,
       indeterminate: false,
-
     }
   },
   methods: {
@@ -67,14 +66,14 @@ export default {
       item.color = this.currentColor
     },
     deleteAllCheck() {
-      if (this.checkedList.length=== 3 ||
-        this.checkedList.length === 2 ||
-        this.checkedList.length === 1) {
+      if (this.checkedList.length > 0) {
         this.arrayWithItems = []
       }
       if (this.checkedList.length === 0) {
         this.arrayWithItems = this.items
       }
+      console.log(this.indeterminate)
+      console.log(this.checkedList)
     },
     additems(value) {
       this.arrayWithItems.push(this.items.find(t => t.value === value))
@@ -93,7 +92,7 @@ export default {
   computed: {
     checkAllList: {
       get: function () {
-        return this.items ? this.checkedList.length == this.items.length: false
+        return this.items ? this.checkedList.length === this.items.length: false
       },
       set: function (value) {
         let checked = []
@@ -108,11 +107,14 @@ export default {
   },
   watch: {
     checkedList() {
-      if (this.checkedList.length === 1 || this.checkedList.length === 2) {
+      if (this.checkedList.length < 4) {
         this.indeterminate = true
       }
-      if (this.checkedList.length === 3 || this.checkedList.length === 0) {
+      if (this.checkedList.length === 0) {
         this.indeterminate = false
+      }
+      if (this.checkedList.length > 0) {
+        this.indeterminate = true
       }
     }
   }

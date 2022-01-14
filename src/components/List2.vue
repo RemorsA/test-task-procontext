@@ -116,9 +116,6 @@ export default {
       if (this.checkedList.length > 0) {
         this.indeterminate = true
       }
-      if (this.indeterminate === false) {
-        this.indeterminate = false
-      }
     }
   }
 }
